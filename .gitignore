@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.DS_Store
+Thumbs.db
+wwwroot/img/cabanas/
