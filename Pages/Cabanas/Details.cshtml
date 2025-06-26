@@ -1,0 +1,36 @@
+@page "{id:int}"
+@model ReservaCabanasApp.Pages.Cabanas.DetailsModel
+@{
+    ViewData["Title"] = "Detalles de Cabaña";
+}
+
+<h2>Detalles de Cabaña</h2>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Número</dt>
+        <dd class="col-sm-9">@Model.Cabana.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Cabana.Nombre</dd>
+        <dt class="col-sm-3">Capacidad</dt>
+        <dd class="col-sm-9">@Model.Cabana.Capacidad</dd>
+        <dt class="col-sm-3">Camas Matrimonial</dt>
+        <dd class="col-sm-9">@Model.Cabana.CamasMatrimonial</dd>
+        <dt class="col-sm-3">Camas Individuales</dt>
+        <dd class="col-sm-9">@Model.Cabana.CamasIndividuales</dd>
+        <dt class="col-sm-3">Precio por día</dt>
+        <dd class="col-sm-9">@Model.Cabana.PrecioPorNoche.ToString("C")</dd>
+        <dt class="col-sm-3">Observaciones</dt>
+        <dd class="col-sm-9">@Model.Cabana.Observaciones</dd>
+        <dt class="col-sm-3">Imagen</dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.Cabana.ImagenUrl))
+            {
+                <img src="@Model.Cabana.ImagenUrl" alt="Imagen" style="max-width:200px;" />
+            }
+        </dd>
+        <dt class="col-sm-3">Activa</dt>
+        <dd class="col-sm-9">@((Model.Cabana.Activa) ? "Sí" : "No")</dd>
+    </dl>
+    <a asp-page="Edit" asp-route-id="@Model.Cabana.Id" class="btn btn-warning">Editar</a>
+    <a asp-page="Index" class="btn btn-secondary">Volver</a>
+</div>
