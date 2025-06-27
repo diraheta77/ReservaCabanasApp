@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ReservaCabanasApp.Models;
 using ReservaCabanasApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReservaCabanasApp.Pages.Cabanas;
 
@@ -16,6 +17,8 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        Cabanas = _context.Cabanas.ToList();
+        Cabanas = _context.Cabanas
+        .Include(c => c.Imagenes)
+        .ToList();
     }
 }

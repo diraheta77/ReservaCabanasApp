@@ -11,4 +11,5 @@ public class Cabana
     public string? Observaciones { get; set; }     // Nuevo
     public string? ImagenUrl { get; set; }         // Nuevo (ruta de la imagen)
     public bool Activa { get; set; }
+    public ICollection<CabanaImagen> Imagenes { get; set; } = new List<CabanaImagen>();
 }

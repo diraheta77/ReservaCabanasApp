@@ -94,13 +94,36 @@
             flex: 1;
             padding: 40px 40px 0 40px;
         }
+
+        /* Personalización global de botones Bootstrap */
+        .btn, .btn-primary, .btn-secondary, .btn-info, .btn-warning, .btn-danger, .btn-success {
+            background-color: #56433f !important;
+            color: #fff !important;
+            border: none !important;
+            border-radius: 10px !important;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 12px 32px;
+            transition: background 0.2s;
+            box-shadow: none;
+        }
+        .btn:hover, .btn-primary:hover, .btn-secondary:hover, .btn-info:hover, .btn-warning:hover, .btn-danger:hover, .btn-success:hover {
+            background-color: #3e2f2c !important;
+            color: #fff !important;
+        }
+        .btn:active, .btn:focus {
+            background-color: #3e2f2c !important;
+            color: #fff !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
     </style>
 </head>
 <body>
     <div class="d-flex">
         <div class="sidebar">
-            <img src="/img/logo.png" alt="Logo" class="logo-img">
-            <div class="logo">AldeaUruel</div>
+            <img src="/img/logo/logo.png" alt="Logo" class="logo-img">
+            @* <div class="logo">AldeaUruel</div> *@
             <a class="nav-link" asp-page="/Reservas">Reservas</a>
             <a class="nav-link" asp-page="/Cabanas/Index">Cabañas</a>
             <a class="nav-link" asp-page="/Clientes">Clientes</a>

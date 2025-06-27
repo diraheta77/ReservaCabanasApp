@@ -10,5 +10,6 @@ namespace ReservaCabanasApp.Data
         public DbSet<Cabana> Cabanas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<CabanaImagen> CabanaImagenes { get; set; }
     }
 }

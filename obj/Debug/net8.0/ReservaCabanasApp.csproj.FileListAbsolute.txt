@@ -156,3 +156,4 @@
 /Users/diegoiraheta/Documents/projects/ReservaCabanasApp/obj/Debug/net8.0/ReservaCabanasApp.pdb
 /Users/diegoiraheta/Documents/projects/ReservaCabanasApp/obj/Debug/net8.0/ReservaCabanasApp.genruntimeconfig.cache
 /Users/diegoiraheta/Documents/projects/ReservaCabanasApp/obj/Debug/net8.0/ref/ReservaCabanasApp.dll
+/Users/diegoiraheta/Documents/projects/ReservaCabanasApp/obj/Debug/net8.0/ReservaCabanasApp.sourcelink.json

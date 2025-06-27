@@ -4,38 +4,73 @@
     ViewData["Title"] = "Cabañas";
 }
 
+<style>
+    .cabana-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 48px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .cabana-card {
+        width: 180px;
+        height: 210px;
+        background: #dabcbc;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.15s;
+    }
+    .cabana-card:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    }
+    .cabana-card-img {
+        flex: 1;
+        background: #e5c7c7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 120px;
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .cabana-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .cabana-card-name {
+        background: #5c4a45;
+        color: #fff;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.1rem;
+        padding: 10px 0 8px 0;
+        letter-spacing: 1px;
+    }
+</style>
+
 <h2>Cabañas</h2>
 <a asp-page="Create" class="btn btn-primary mb-3">Nueva Cabaña</a>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Número</th>
-            <th>Nombre</th>
-            <th>Capacidad</th>
-            <th>Camas Matrimonial</th>
-            <th>Camas Individuales</th>
-            <th>Precio por día</th>
-            <th>Activa</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Cabanas)
-    {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Nombre</td>
-            <td>@item.Capacidad</td>
-            <td>@item.CamasMatrimonial</td>
-            <td>@item.CamasIndividuales</td>
-            <td>@item.PrecioPorNoche.ToString("C")</td>
-            <td>@(item.Activa ? "Sí" : "No")</td>
-            <td>
-                <a asp-page="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Ver</a>
-                <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
-                <a asp-page="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="cabana-grid">
+@foreach (var cabana in Model.Cabanas)
+{
+    <div class="cabana-card" onclick="location.href='@Url.Page("Details", new { id = cabana.Id })'">
+        <div class="cabana-card-img">
+            @if (cabana.Imagenes != null && cabana.Imagenes.Any())
+            {
+                <img src="@cabana.Imagenes.First().ImagenUrl" alt="Imagen de @cabana.Nombre" />
+            }
+        </div>
+        <div class="cabana-card-name">@cabana.Nombre</div>
+    </div>
+}
+</div>
