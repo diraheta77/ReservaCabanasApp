@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ReservaCabanasApp.Models;
 using ReservaCabanasApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReservaCabanasApp.Pages.Cabanas;
 
@@ -18,9 +19,13 @@ public class EditModel : PageModel
 
     public IActionResult OnGet(int id)
     {
-        Cabana = _context.Cabanas.Find(id);
+        Cabana = _context.Cabanas
+            .Include(c => c.Imagenes)
+            .FirstOrDefault(c => c.Id == id);
+
         if (Cabana == null)
             return NotFound();
+
         return Page();
     }
 

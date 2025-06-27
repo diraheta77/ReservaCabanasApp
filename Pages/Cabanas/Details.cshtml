@@ -4,33 +4,206 @@
     ViewData["Title"] = "Detalles de Cabaña";
 }
 
-<h2>Detalles de Cabaña</h2>
-<div>
-    <dl class="row">
-        <dt class="col-sm-3">Número</dt>
-        <dd class="col-sm-9">@Model.Cabana.Id</dd>
-        <dt class="col-sm-3">Nombre</dt>
-        <dd class="col-sm-9">@Model.Cabana.Nombre</dd>
-        <dt class="col-sm-3">Capacidad</dt>
-        <dd class="col-sm-9">@Model.Cabana.Capacidad</dd>
-        <dt class="col-sm-3">Camas Matrimonial</dt>
-        <dd class="col-sm-9">@Model.Cabana.CamasMatrimonial</dd>
-        <dt class="col-sm-3">Camas Individuales</dt>
-        <dd class="col-sm-9">@Model.Cabana.CamasIndividuales</dd>
-        <dt class="col-sm-3">Precio por día</dt>
-        <dd class="col-sm-9">@Model.Cabana.PrecioPorNoche.ToString("C")</dd>
-        <dt class="col-sm-3">Observaciones</dt>
-        <dd class="col-sm-9">@Model.Cabana.Observaciones</dd>
-        <dt class="col-sm-3">Imagen</dt>
-        <dd class="col-sm-9">
-            @if (!string.IsNullOrEmpty(Model.Cabana.ImagenUrl))
-            {
-                <img src="@Model.Cabana.ImagenUrl" alt="Imagen" style="max-width:200px;" />
-            }
-        </dd>
-        <dt class="col-sm-3">Activa</dt>
-        <dd class="col-sm-9">@((Model.Cabana.Activa) ? "Sí" : "No")</dd>
-    </dl>
-    <a asp-page="Edit" asp-route-id="@Model.Cabana.Id" class="btn btn-warning">Editar</a>
-    <a asp-page="Index" class="btn btn-secondary">Volver</a>
+<style>
+    .cabana-form-container {
+        background: #fff;
+        padding: 40px 30px 30px 30px;
+        border-radius: 8px;
+        max-width: 1050px;
+        margin: 0 auto;
+    }
+    .cabana-form-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 24px;
+    }
+    .cabana-form-row {
+        display: flex;
+        gap: 40px;
+    }
+    .cabana-form-fields {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .cabana-form-label {
+        font-weight: 500;
+        margin-bottom: 2px;
+    }
+    .cabana-form-value {
+        background: #e5e5e5;
+        border-radius: 3px;
+        padding: 6px 10px;
+        margin-bottom: 4px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+    }
+    .cabana-form-img {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 270px;
+    }
+    .cabana-img-preview-box {
+        width: 270px;
+        height: 220px;
+        border: 2px solid #888;
+        background: #fafafa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .cabana-img-preview-box img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    .cabana-img-carousel-controls {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 8px;
+    }
+    .cabana-img-carousel-btn {
+        background: #5c4a45;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 4px 16px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .cabana-img-carousel-btn:disabled {
+        background: #bdbdbd;
+        cursor: not-allowed;
+    }
+    .cabana-form-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        margin-top: 40px;
+    }
+    .cabana-btn {
+        background: #5c4a45;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 60px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: background 0.2s;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .cabana-btn:hover {
+        background: #3e2f2c;
+        color: #fff;
+    }
+</style>
+
+<div class="cabana-form-container">
+    <div class="cabana-form-title">DETALLES DE CABAÑA</div>
+    <div class="cabana-form-row">
+        <div class="cabana-form-fields">
+            <label class="cabana-form-label">Número</label>
+            <div class="cabana-form-value">@Model.Cabana.Id</div>
+
+            <label class="cabana-form-label">Nombre</label>
+            <div class="cabana-form-value">@Model.Cabana.Nombre</div>
+
+            <label class="cabana-form-label">Cantidad de Huéspedes</label>
+            <div class="cabana-form-value">@Model.Cabana.Capacidad</div>
+
+            <label class="cabana-form-label">Camas Matrimonial</label>
+            <div class="cabana-form-value">@Model.Cabana.CamasMatrimonial</div>
+
+            <label class="cabana-form-label">Camas Individuales</label>
+            <div class="cabana-form-value">@Model.Cabana.CamasIndividuales</div>
+
+            <label class="cabana-form-label">Precio por día</label>
+            <div class="cabana-form-value">@Model.Cabana.PrecioPorNoche.ToString("C")</div>
+
+            <label class="cabana-form-label">Observaciones</label>
+            <div class="cabana-form-value">@Model.Cabana.Observaciones</div>
+
+            <label class="cabana-form-label">Activa</label>
+            <div class="cabana-form-value">@((Model.Cabana.Activa) ? "Sí" : "No")</div>
+        </div>
+        <div class="cabana-form-img">
+            <div class="cabana-img-preview-box" id="imgPreviewBox">
+                <span id="imgPreviewPlaceholder" style="color:#aaa;">Vista previa</span>
+            </div>
+            <div class="cabana-img-carousel-controls">
+                <button type="button" class="cabana-img-carousel-btn" id="prevImgBtn" disabled>&lt;</button>
+                <button type="button" class="cabana-img-carousel-btn" id="nextImgBtn" disabled>&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="cabana-form-buttons">
+        <a asp-page="Edit" asp-route-id="@Model.Cabana.Id" class="cabana-btn" style="background:#e5a45a;">Editar</a>
+        <a asp-page="Index" class="cabana-btn" style="background:#5c4a45;">Volver</a>
+    </div>
 </div>
+
+@section Scripts {
+<script>
+    // Carga las imágenes desde el modelo Razor
+    const imagenes = [
+        @if (Model.Cabana.Imagenes != null && Model.Cabana.Imagenes.Any())
+        {
+            @foreach (var img in Model.Cabana.Imagenes)
+            {
+                @: "@img.ImagenUrl",
+                // (la coma final no afecta en JS)
+            }
+        }
+    ];
+    let imgIndex = 0;
+
+    function updatePreview() {
+        const previewBox = document.getElementById('imgPreviewBox');
+        const placeholder = document.getElementById('imgPreviewPlaceholder');
+        const prevBtn = document.getElementById('prevImgBtn');
+        const nextBtn = document.getElementById('nextImgBtn');
+        previewBox.innerHTML = '';
+        if (imagenes.length === 0) {
+            placeholder.style.display = '';
+            previewBox.appendChild(placeholder);
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return;
+        }
+        const img = document.createElement('img');
+        img.src = imagenes[imgIndex];
+        previewBox.appendChild(img);
+        prevBtn.disabled = imgIndex === 0;
+        nextBtn.disabled = imgIndex === imagenes.length - 1;
+    }
+
+    document.getElementById('prevImgBtn').addEventListener('click', function () {
+        if (imgIndex > 0) {
+            imgIndex--;
+            updatePreview();
+        }
+    });
+
+    document.getElementById('nextImgBtn').addEventListener('click', function () {
+        if (imgIndex < imagenes.length - 1) {
+            imgIndex++;
+            updatePreview();
+        }
+    });
+
+    updatePreview();
+</script>
+}
